@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet Map with Markers</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 870px;
+            width: 100%;
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        .dflex-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            gap: 8px;
+        }
+
+        .dflex-wrapper p {
+            margin: 0;
+            padding: 0;
+            color: var(--Accent-Black, #000);
+            font-family: "Roboto Mono";
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 14px; /* 100% */
+        }
+        .info-container {
+            display: flex;
+            align-items: flex-start;
+            justify-content: start;
+            flex-direction: column;
+            gap: 10px;
+}
+
+        
+.leaflet-marker-icon {
+    filter: sepia(80%) hue-rotate(10deg) saturate(200%) brightness(80%);
+}
+
+
+
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        let map;
+   
+        function initMap() {
+            map = L.map('map').setView([56.051097964126484, 18.963493660809032], 4); 
+
+        
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+
+            
+            const locations = [
+                { lat: 45.58505686952793, lng: 5.277826373009277, name: "France", tracks: "GT Concept", link: "https://www.gt-concept.fr/", email: "info@gt-concept.fr" ,number: "TÉL (+33)(0)4.74.93.12.38" },
+                { lat: 34.0522, lng: -118.2437, name: "Los Angeles", tracks: "mid lane", link: "https://www.sanfrancisco.com", email: "exotek@gmail.com" ,number: "123-456-7890"},
+                { lat: 40.7128, lng: -74.006, name: "New York", tracks: "mid lane", link: "https://www.sanfrancisco.com", email: "exotek@gmail.com" ,number: "123-456-7890" },
+                { lat: 40.7128, lng: -74.006, name: "New York", tracks: "mid lane", link: "https://www.sanfrancisco.com", email: "exotek@gmail.com" ,number: "123-456-7890"},
+                { lat: 40.7128, lng: -74.006, name: "New York", tracks: "mid lane", link: "https://www.sanfrancisco.com", email: "exotek@gmail.com" ,number: "123-456-7890" }
+            ];
+
+  
+            locations.forEach(location => {
+                addMarkerToMap(location.lat, location.lng, location.name, location.tracks, location.link, location.number, location.email, location.desc);
+            });
+        }
+
+        function addMarker() {
+            const lat = parseFloat(document.getElementById('lat').value);
+            const lng = parseFloat(document.getElementById('lng').value);
+            const name = document.getElementById('name').value;
+            const tracks = document.getElementById('tracks').value;
+            const link = document.getElementById('link').value;
+            const number = document.getElementById('number').value;
+            const email = document.getElementById('email').value;
+            const desc = document.getElementById('desc').value;
+
+            if (!isNaN(lat) && !isNaN(lng) && name.trim() !== "" && desc.trim() !== "") {
+                addMarkerToMap(lat, lng, name, tracks, link, number, email, desc);
+            } else {
+                alert("Please enter valid latitude, longitude, name, and description.");
+            }
+        }
+
+        function addMarkerToMap(lat, lng, name, tracks, link, number, email, desc) {
+            const marker = L.marker([lat, lng]).addTo(map);
+            marker.bindPopup(`
+                <div class="info-container">
+                <div class="dflex-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M8 8C6.9 8 5.95833 7.60833 5.175 6.825C4.39167 6.04167 4 5.1 4 4C4 2.9 4.39167 1.95833 5.175 1.175C5.95833 0.391667 6.9 0 8 0C9.1 0 10.0417 0.391667 10.825 1.175C11.6083 1.95833 12 2.9 12 4C12 5.1 11.6083 6.04167 10.825 6.825C10.0417 7.60833 9.1 8 8 8ZM0 16V13.2C0 12.6333 0.146 12.1127 0.438 11.638C0.73 11.1633 1.11733 10.8007 1.6 10.55C2.63333 10.0333 3.68333 9.646 4.75 9.388C5.81667 9.13 6.9 9.00067 8 9C9.1 8.99933 10.1833 9.12867 11.25 9.388C12.3167 9.64733 13.3667 10.0347 14.4 10.55C14.8833 10.8 15.271 11.1627 15.563 11.638C15.855 12.1133 16.0007 12.634 16 13.2V16H0Z" fill="#7D6F54"/>
+                </svg><p>${name}</p></div>
+                <div class="dflex-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M3 20V14.5H10V16H14V14.5H21V20H3ZM11 15V13H13V15H11ZM3 13.5V7H9V4H15V7H21V13.5H14V12H10V13.5H3ZM10 7H14V5H10V7Z" fill="#7D6F54"/>
+                </svg><p>${tracks}</p></div>
+                <a class="dflex-wrapper" href="${link}" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M3.9 12C3.9 10.29 5.29 8.9 7 8.9H11V7H7C4.24 7 2 9.24 2 12C2 14.76 4.24 17 7 17H11V15.1H7C5.29 15.1 3.9 13.71 3.9 12ZM8 13H16V11H8V13ZM17 7H13V8.9H17C18.71 8.9 20.1 10.29 20.1 12C20.1 13.71 18.71 15.1 17 15.1H13V17H17C19.76 17 22 14.76 22 12C22 9.24 19.76 7 17 7Z" fill="#7D6F54"/>
+                </svg><p>${link}</p></a>
+                <a class="dflex-wrapper" href="mailto:${email}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.9 4.80005H20.1C20.3387 4.80005 20.5676 4.89487 20.7364 5.06365C20.9052 5.23244 21 5.46135 21 5.70005V18.3C21 18.5387 20.9052 18.7677 20.7364 18.9364C20.5676 19.1052 20.3387 19.2 20.1 19.2H3.9C3.66131 19.2 3.43239 19.1052 3.2636 18.9364C3.09482 18.7677 3 18.5387 3 18.3V5.70005C3 5.46135 3.09482 5.23244 3.2636 5.06365C3.43239 4.89487 3.66131 4.80005 3.9 4.80005ZM18.3279 6.52265L12.1404 11.4726C12.1005 11.5045 12.051 11.5218 12 11.5218C11.949 11.5218 11.8995 11.5045 11.8596 11.4726L5.6721 6.52265L4.8279 7.57745L11.0163 12.5274C11.2955 12.7508 11.6424 12.8724 12 12.8724C12.3576 12.8724 12.7045 12.7508 12.9837 12.5274L19.1721 7.57745L18.3279 6.52265Z" fill="#7D6F54"/>
+                </svg><p>${email}</p></a>
+                <div class="dflex-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M18.7428 15.9665L15.5482 13.062C15.3973 12.9245 15.1988 12.8512 14.9948 12.8575C14.7908 12.8638 14.5972 12.9493 14.4551 13.0958L12.5745 15.0298C12.1218 14.9433 11.2118 14.6597 10.275 13.7253C9.33825 12.7877 9.05455 11.8753 8.97046 11.4258L10.9029 9.54443C11.0494 9.40229 11.1349 9.20873 11.1412 9.00471C11.1475 8.80068 11.0742 8.60221 10.9367 8.45129L8.03291 5.25752C7.89542 5.10613 7.70432 5.0143 7.50021 5.00153C7.2961 4.98877 7.09505 5.05607 6.93976 5.18915L5.23441 6.65165C5.09854 6.78801 5.01745 6.9695 5.00651 7.16168C4.99472 7.35815 4.76996 12.0121 8.3787 15.6223C11.5269 18.7697 15.4704 19 16.5565 19C16.7153 19 16.8127 18.9953 16.8386 18.9937C17.0307 18.9824 17.2118 18.901 17.3479 18.765L18.8096 17.0589C18.9432 16.9041 19.011 16.7032 18.9985 16.4991C18.9861 16.295 18.8943 16.1039 18.7428 15.9665Z" fill="#7D6F54"/>
+                </svg><p>${number}</p>
+               </div>
+               </div>
+            `);
+        }
+
+        window.onload = initMap;
+    </script>
+</body>
+</html>
