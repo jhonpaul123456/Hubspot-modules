@@ -1,0 +1,102 @@
+<!--
+    templateType: blog_post
+    isAvailableForNewContent: true
+    label: Download template
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta charset="utf-8">
+    {% if content.html_title %}<title>{{ content.html_title }}</title>{% endif %}
+    <meta name="description" content="{{ content.meta_description }}">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    {% if brand_settings.primaryFavicon.src %}
+      <link rel="shortcut icon" href="{{ brand_settings.primaryFavicon.src }}" />
+    {% endif %}
+    
+   
+    {{ require_css(get_asset_url("/Publiq theme/css/main.css")) }}
+    {# This is intended to be used if a template requires template specific style sheets #}
+    {% if template_css %}
+      {{ require_css(get_asset_url(template_css)) }}
+    {% endif %}
+    {{ require_css(get_asset_url("../../css/theme-overrides.css")) }}
+    
+    {{ require_css(get_asset_url('/Publiq theme/css/main.css')) }}
+    {{ require_css(get_asset_url('/Publiq theme/css/publiq_css')) }}
+    {{ require_css(get_asset_url('/Publiq theme/css/blog-template-css')) }}
+    
+    {{ standard_header_includes }}
+  </head>
+  <body>
+    {% block header %}
+    {% module "module_17471231190522" path="/Publiq theme/modules/Globals/Global navigation", label="Global navigation" %}
+    {% endblock header %}
+
+    <div class="global-topbtm64128-padding">
+      <div class="mw-container">
+        
+          <div class="bcumb-sharer-wrapper dflex-between mw700">
+            
+            
+                    <div class="bcumb-sharer-col1">
+          
+                     <div class="dflex-center gap8 bcmb-wrapper">
+                       
+              <a href="/downloads" class="textblack fw700 p2">
+                Downloads  
+              </a>
+              <div class="lsep">
+                
+              </div>
+            
+               <span class="post-tag" style="display: none;">
+              {% if content.tag_list %}
+                        {% for tag in content.tag_list %}
+                          {% set postTag = tag.name %}
+                 <p class="p2"> {{ tag.name }} </p>       
+                        {% endfor %}
+                {% endif %}</span>
+          </div>
+          
+          
+          
+                      
+          <h2 class="h2 mb8 textblack">
+              {{ content.name }}
+          </h2>
+                      
+                 
+          
+          
+        </div>
+            
+            
+            
+            
+          </div>
+        
+        
+        <div class="content-enform-wrapper mt48">
+          
+            {% module "module_17513662295755" path="/Publiq theme/modules/Publiq modules/Download form", label="Download form" %}
+        
+        </div>
+        
+        
+        
+      
+        
+      </div>
+    </div>
+
+    
+    {{ standard_footer_includes }}
+    {% block footer %}
+    {% module "module_17442635664913" path="/Publiq theme/modules/Globals/Global footer", label="Global footer" %}
+    {% endblock footer %}
+  </body>
+</html>
