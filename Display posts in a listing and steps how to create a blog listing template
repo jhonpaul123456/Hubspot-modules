@@ -1,0 +1,98 @@
+clone the listing and copy paste this code
+
+
+// JUST AN EXAMPLE
+
+<!--
+    templateType: blog_listing
+    isAvailableForNewContent: true
+    label: Download listing
+-->
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    {% if content.html_title %}<title>{{ content.html_title }}</title>{% endif %}
+    <meta name="description" content="{{ content.meta_description }}">
+    
+    {% if brand_settings.primaryFavicon.src %}
+      <link rel="shortcut icon" href="{{ brand_settings.primaryFavicon.src }}" />
+    {% endif %}
+    
+
+    {% if template_css %}
+      {{ require_css(get_asset_url(template_css)) }}
+    {% endif %}
+    {{ require_css(get_asset_url("/Rindus_theme_v3/css/theme-overrides.css")) }}
+    
+    {{ require_css(get_asset_url('/Rindus_theme_v3/css/main.css')) }}
+    {{ require_css(get_asset_url('/Rindus_theme_v3/css/Rindus theme CSS/global_styles.css')) }}
+
+    
+    {{ standard_header_includes }}
+  </head>
+  <body>
+    <main>
+
+     {% block header %}
+      {% module "module_17682847414551" path="/Rindus_theme_v3/modules/Globals/Header", label="Header" %}
+     {% endblock header %}
+  
+      {% dnd_area "dnd_area" label="Main section" %}
+   
+      {% end_dnd_area %}
+      
+      
+      {% block footer %}
+         {% module "module_17682847474382" path="/Rindus_theme_v3/modules/Globals/Footer", label="Footer" %}
+      {% endblock footer %}
+      
+      
+
+    </main>
+    {{ standard_footer_includes }}
+  </body>
+</html>
+
+
+//
+
+
+
+
+<div class="global-padtb11280">
+  
+  <div class="mw-container">
+    
+    <div class="dgrid-threecol alstart download-listing-wrapper">
+      
+    {% for content in contents  %}
+      <div class="dl-item">
+        
+        {% if content.tag_list %}
+        <h6 class="h6 textpurple alluppercase mb8">
+            {{ content.tag_list }}
+        </h6>
+        {% endif %}
+        
+
+        
+        <a href="{{ content.absolute_url }}" class="h4 textblue textleft mb16 dl-title">
+         {{ content.name }}
+        </a>
+        <p class="p1 textblue mb24 dl-body">
+          {{ content.post_body }}
+        </p>
+        <a href="{{ content.absolute_url }}" class="purple-btn transition3s">Download</a>
+      </div>
+      {% endfor %}
+         
+
+
+      
+    </div>
+    
+  </div>
+  
+  
+</div>
