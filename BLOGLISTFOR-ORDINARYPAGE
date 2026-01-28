@@ -1,0 +1,88 @@
+DISPLAY BLOG FOR WEBSITE/LANDING PAGE
+
+
+<div class="global-padding120 forestgreen-bg">
+  
+  <div class="mw-container">
+    
+      <div class="case-study-wrapper">
+        
+        <div class="cs-intro-container dflex-center direction-column">
+          
+        
+        <h2 class="h2 alluppercase darkgreen mb24 textcenter textcentertoleft">
+          {{ module.headline }}
+        </h2>
+        
+        <p class="p1 textwhite textcentertoleft">
+          See how senior military leaders across NATO have partnered with AFG to overcome operational challenges, elevate training standards, and enhance combat readiness. Read more
+        </p>
+        
+        </div>
+        
+        
+        <div class="dflex-start gap128 direction-column w100 case-item-wrapper">
+          
+                     
+          
+          
+        {% if module.blog_field %}
+{% set recent_posts = blog_recent_posts(module.blog_field, 3) %}
+{% else %}
+{% set recent_posts = blog_recent_posts(144611005, 3) %}
+{% endif %}  
+          
+       {% for testp in recent_posts %}
+          <div class="dflex-between case-item gap82">
+            
+            <div class="case-item-imgwra">
+           
+                      <img class="float" src="https://3828409.fs1.hubspotusercontent-na1.net/hubfs/3828409/Group%2014-1.png" alt="float">
+         
+                <div class="hexagon">
+                              <a href="{{ testp.absolute_url }}">
+                              {% if testp.featured_image %}
+                                <img class="mb24"
+                                  src="{{ resize_image_url(testp.featured_image, 0, 0, 1200) }}" 
+                                  alt="{{ testp.featured_image_alt_text }}" 
+                                  loading="lazy"
+                                  decoding="async"
+                                >
+                              {% endif %}
+                            </a>
+                  </div>
+              
+              	
+              <img class="btmfloat" src="https://3828409.fs1.hubspotusercontent-na1.net/hubfs/3828409/Rectangle%205.png" alt="float sqr">
+      
+               <img class="btmfloat2" src="https://3828409.fs1.hubspotusercontent-na1.net/hubfs/3828409/Group%2016.png" alt="float sqr">
+  
+            </div>
+            
+            
+            
+            <div class="case-item-content">
+              <a href="{{ testp.absolute_url }}" class="h3 mb24 alluppercase tan casetitle">
+                {{ testp.name }}
+              </a>
+              <p class="p1 textwhite mb24">
+                {{ testp.meta_description|truncate(100, false, "...") }}
+              </p>
+              <a href="{{ testp.absolute_url }}" class="alluppercase btn-black-tan dblock">Read more</a>
+            </div>
+            
+            
+          </div>
+       {% endfor %}
+          
+          
+          
+          
+        </div>
+        
+        
+      </div>
+    
+  </div>
+  
+</div>
