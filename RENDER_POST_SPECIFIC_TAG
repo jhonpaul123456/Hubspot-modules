@@ -1,0 +1,68 @@
+RENDER POST WITH SPECIFIC TAG 
+
+<div class="global-padding bgbrown">
+
+  <div class="mw-container">
+    
+    <div class="dflex-center mw768 direction-column w100 mauto mb80">
+      <h2 class="h2 forestgreen alluppercase mb24 textcenter">
+        {{ module.heading }}
+      </h2>
+      <p class="p1 textblack textcenter">
+        {{ module.subheading }}
+      </p>
+    </div>
+
+
+
+    
+
+    {% set tag_posts = blog_recent_tag_posts(module.query.blog, "Operational Units", 5) %}
+
+    
+    
+<div class="dgrid-twocol gap32">
+  
+      
+     {% for item in tag_posts %}
+
+
+      
+      <div class="case-item-small">
+        
+        <div class="case-content">
+          
+          
+
+          <img src="{{item.featured_image}}" alt="featured image">
+       
+             {% if item.tag_list %}
+            <div class="tags-container">
+              {% for tag in item.tag_list %}
+              <span class="tag-item">{{ tag }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+        
+          <a href="{{ item.absolute_url }}">
+        <h3 class="h3 alluppercase forestgreen dblock case-title">
+          {{ item.name }}
+        </h3>
+          </a>
+        <p class="p1 textblack case-body">
+          {{ item.meta_description }}
+        </p>
+        
+           </div>
+        <a href="{{ item.absolute_url }}" class="btn-forestgreen alluppercase dblock">READ MORE</a>
+      </div>
+      
+
+
+    {% endfor %}
+
+  </div>
+  
+  </div>
+  
+  </div>
