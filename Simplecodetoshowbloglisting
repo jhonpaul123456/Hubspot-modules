@@ -1,0 +1,15 @@
+<section class="bg-beige-light pt-6 pb-10 lg:py-20">
+    <div class="container px-3">
+        <div class="grid grid-cols-3 gap-x-4 gap-y-5 md:grid-cols-5 md:gap-8 lg:grid-cols-6 lg:gap-10">
+            {% for content in contents %}
+                <a href="{{ content.absolute_url }}">
+                    <div class="group bg-white border-b-4 border-beige w-full before:block before:pb-[100%] group-hover:transition-all relative">
+                        <div class="absolute inset-0 p-3 flex justify-center items-center group-hover:scale-105 group-hover:duration-300 ">
+                            <img class="max-h-full" src="{{ content.featured_image }}" alt="{{ content.featured_image_alt_text }}" />
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
