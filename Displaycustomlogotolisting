@@ -1,0 +1,64 @@
+LISTING PAGE
+
+<div class="global-padtb11280">
+  
+  <div class="mw-container">
+    
+    
+    <div class="dgrid-twocol gap32 bl-wrapper">
+      
+      {% for post in contents %}
+      <script>
+        console.log("{{post.widgets}}");
+      </script>
+      <div class="b-item">
+        <div>
+          <div class="cases-img-wr">
+            
+          <a href="{{ post.absolute_url }}">
+          {% if post.featured_image %}
+            <img class="mb24"
+              src="{{ resize_image_url(post.featured_image, 0, 0, 1200) }}" 
+              alt="{{ post.featured_image_alt_text }}" 
+              loading="lazy"
+              decoding="async"
+            >
+          {% endif %}
+        </a>
+            
+            </div>
+      
+      <img class="company-logo" alt="Client company logo" src="{{ post.widgets.module_17725159040625.body.company_logo.src }}"/>
+        <div class="mb8">
+                  <a href="{{ post.absolute_url }}" class="h5 textblue">
+          {{ post.name }}
+        </a>
+        </div>
+
+        <div class="p1 textblue mb24">
+          {{ post.meta_description|truncate(100, false, "...") }}
+        </div>
+        </div>
+        <a href="{{ post.absolute_url }}" class="purple-btn transition3s">Read now</a>
+      </div>
+      {% endfor %}
+            
+      
+      
+      
+    </div>
+    
+    
+  </div>
+  
+  
+  
+  
+</div>
+
+
+
+
+THE MODULE
+
+<img class="company-logo" alt="Client company logo" src="{{ post.widgets.module_17725159040625.body.company_logo.src }}"/>
