@@ -59,6 +59,6 @@ LISTING PAGE
 
 
 
-THE MODULE
+THE MODULE - TO FETCH THE IMAGE GO TO CONSOLE AND FIND THE FIRST MODULE ID
 
 <img class="company-logo" alt="Client company logo" src="{{ post.widgets.module_17725159040625.body.company_logo.src }}"/>
